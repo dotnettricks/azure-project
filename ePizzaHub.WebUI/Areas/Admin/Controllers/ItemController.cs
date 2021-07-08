@@ -4,6 +4,7 @@ using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Interfaces;
 using ePizzaHub.WebUI.Models;
+using ePizzaHub.WebUI.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,11 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
         {
             try
             {
-                model.ImageUrl = _fileHelper.UploadFile(model.File);
+                string filename = Path.GetFileName(model.File.FileName);
+
+                ImageBlobStorageService imgBlobService = new ImageBlobStorageService(_config);
+                model.ImageUrl = imgBlobService.UploadFileToBlobAsync(filename, model.File.OpenReadStream(), model.File.ContentType).Result;
+                //model.ImageUrl = _fileHelper.UploadFile(model.File);
                 Item data = new Item
                 {
                     Name = model.Name,
@@ -91,8 +96,14 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
             {
                 if (model.File != null)
                 {
-                    _fileHelper.DeleteFile(model.ImageUrl);
-                    model.ImageUrl = _fileHelper.UploadFile(model.File);
+                    //_fileHelper.DeleteFile(model.ImageUrl);
+                    //model.ImageUrl = _fileHelper.UploadFile(model.File);
+                    string filename = Path.GetFileName(model.File.FileName);
+
+                    ImageBlobStorageService imgBlobService = new ImageBlobStorageService(_config);
+                    imgBlobService.DeleteBlobData(model.ImageUrl);
+                    model.ImageUrl = imgBlobService.UploadFileToBlobAsync(filename, model.File.OpenReadStream(), model.File.ContentType).Result;
+                    
                 }
 
                 Item data = new Item
@@ -123,7 +134,9 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
         {
             url = url.Replace("%2F", "/"); //replace to find the file
             _catalogService.DeleteItem(id);
-            _fileHelper.DeleteFile(url);
+            //_fileHelper.DeleteFile(url);
+            ImageBlobStorageService objBlob = new ImageBlobStorageService(_config);
+            objBlob.DeleteBlobData(url);
             return RedirectToAction("Index");
         }
     }
