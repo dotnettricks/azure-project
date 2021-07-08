@@ -1,6 +1,7 @@
 using ePizzaHub.Services.Configuration;
 using ePizzaHub.Services.Models;
 using ePizzaHub.WebUI.Configuration;
+using ePizzaHub.WebUI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,8 @@ namespace ePizzaHub.WebUI
             ConfigureDependencies.AddServices(services);
            
             services.AddSession();
+            services.AddTransient<IQueueService, QueueService>();
+            services.AddTransient<IPaymentQueueService, PaymentQueueService>();
 
             services.AddWebMarkupMin(options =>
             {

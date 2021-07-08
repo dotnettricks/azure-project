@@ -9,6 +9,7 @@ using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.Repositories.Models;
 using ePizzaHub.WebUI.Models;
 using ePizzaHub.WebUI.Interfaces;
+using ePizzaHub.WebUI.Services;
 
 namespace ePizzaHub.WebUI.Controllers
 {
@@ -21,6 +22,7 @@ namespace ePizzaHub.WebUI.Controllers
         private readonly IOptions<RazorPayConfig> _razorPayConfig;
         private readonly IPaymentService _paymentService;
         private readonly IOrderService _orderService;
+        private readonly IPaymentQueueService _paymentQueueService;
         public IUserAccessor _userAccessor { get; set; }
         public User CurrentUser
         {
@@ -33,12 +35,13 @@ namespace ePizzaHub.WebUI.Controllers
             }
         }
 
-        public PaymentController(IPaymentService paymentService, IOrderService orderService, IOptions<RazorPayConfig> razorPayConfig, IUserAccessor userAccessor)
+        public PaymentController(IPaymentService paymentService, IOrderService orderService, IOptions<RazorPayConfig> razorPayConfig, IUserAccessor userAccessor,IPaymentQueueService paymentQueueService)
         {
             _razorPayConfig = razorPayConfig;
             _paymentService = paymentService;
             _userAccessor = userAccessor;
             _orderService = orderService;
+            _paymentQueueService = paymentQueueService;
         }
 
         public IActionResult Index()
@@ -104,8 +107,11 @@ namespace ePizzaHub.WebUI.Controllers
                             Address address = TempData.Get<Address>("Address");
                             _orderService.PlaceOrder(CurrentUser.Id, orderId, paymentId, cart, address);
 
-                            //TO DO: Send email
+                            
                             TempData.Set("PaymentDetails", model);
+
+                            //adding to queue to send out an email for payment
+                            _paymentQueueService.SendMessageAsync(model, "PaymentQueue");
                             return RedirectToAction("Receipt");
                         }
                         else

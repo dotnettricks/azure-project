@@ -3,6 +3,7 @@ using ePizzaHub.Entities;
 using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Models;
+using ePizzaHub.WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,12 +15,14 @@ namespace ePizzaHub.WebUI.Controllers
     public class AccountController : Controller
     {
         IAuthenticationService _authService;
+        IQueueService _queueService;
         private readonly ILogger<AccountController> _logger;
 
-        public AccountController(ILogger<AccountController> logger, IAuthenticationService authService)
+        public AccountController(ILogger<AccountController> logger, IAuthenticationService authService, IQueueService queueService)
         {
             _authService = authService;
             _logger = logger;
+            _queueService = queueService;
         }
 
         [CustomExceptionFilter]
@@ -74,6 +77,14 @@ namespace ePizzaHub.WebUI.Controllers
                 bool result = _authService.CreateUser(user, model.Password);
                 if (result)
                 {
+                    UserModelEmailTemplate usr = new UserModelEmailTemplate
+                    {
+                        UserName = model.Name,
+                        Email = model.Email
+                    };
+
+                    //Adding to queue the user details to send email 
+                    _queueService.SendMessageAsync(usr, "emailqueue");
                     return RedirectToAction("Login");
                 }
             }
