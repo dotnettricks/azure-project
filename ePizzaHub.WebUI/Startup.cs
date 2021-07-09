@@ -49,6 +49,11 @@ namespace ePizzaHub.WebUI
 
             var builder = services.AddControllersWithViews();
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetConnectionString("Redis");
+                options.InstanceName = "RedisItems_";
+            });
 #if DEBUG
             if (Env.IsDevelopment())
             {
