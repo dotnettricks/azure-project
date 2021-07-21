@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.20.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ePizzaHub.Entities\ePizzaHub.Entities.csproj" />
     <ProjectReference Include="..\ePizzaHub.Repositories\ePizzaHub.Repositories.csproj" />
   </ItemGroup>
 

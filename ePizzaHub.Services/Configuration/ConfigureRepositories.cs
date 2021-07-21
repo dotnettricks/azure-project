@@ -18,6 +18,12 @@ namespace ePizzaHub.Services.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DbConnection"));
             });
 
+
+            services.AddDbContext<AppDbContextCosmos>((options) =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DbConnectionCosmos"));
+            });
+
             services.AddIdentity<User, Role>().
                 AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 

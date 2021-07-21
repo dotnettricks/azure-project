@@ -84,7 +84,8 @@ namespace ePizzaHub.Services.Implementations
                 }
                 return cart;
             }
-            catch (Exception ex)
+            catch (Exception 
+            ex)
             {
                 return null;
             }
@@ -97,6 +98,11 @@ namespace ePizzaHub.Services.Implementations
         public int UpdateCart(Guid CartId, int UserId)
         {
             return _cartRepo.UpdateCart(CartId, UserId);
+        }
+
+        CartModel ICartService.GetCartDetails(Guid cartId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
