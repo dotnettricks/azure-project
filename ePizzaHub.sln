@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePizzaHub.Services", "ePizz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePizzaHub.WebUI", "ePizzaHub.WebUI\ePizzaHub.WebUI.csproj", "{4C03C897-2AED-4418-8E01-84B1A8915D18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentConfirmationEmailFunction", "PaymentConfirmationEmailFunction\PaymentConfirmationEmailFunction.csproj", "{767FCE78-B959-40E9-A95E-B7F1442F96A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePizzaHub.Email", "PaymentConfirmationEmailFunction\ePizzaHub.Email.csproj", "{767FCE78-B959-40E9-A95E-B7F1442F96A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusEmail", "ServiceBusEmail\ServiceBusEmail.csproj", "{6CCD64C3-D4C8-4B97-B917-F1D6FF06F5B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePizzaHub.ServiceBus", "ServiceBusEmail\ePizzaHub.ServiceBus.csproj", "{6CCD64C3-D4C8-4B97-B917-F1D6FF06F5B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
