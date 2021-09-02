@@ -1,12 +1,8 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Services.Interfaces;
-using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Interfaces;
 using ePizzaHub.WebUI.Models;
 using ePizzaHub.WebUI.Services;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,9 +12,10 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
 {
     public class ItemController : BaseController
     {
-        ICatalogService _catalogService;
-        IFileHelper _fileHelper;
-        IConfiguration _config;
+        private ICatalogService _catalogService;
+        private IFileHelper _fileHelper;
+        private IConfiguration _config;
+
         public ItemController(ICatalogService catalogService, IConfiguration config, IFileHelper fileHelper)
         {
             _catalogService = catalogService;
@@ -64,7 +61,6 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-
             }
             ViewBag.Categories = _catalogService.GetCategories();
             ViewBag.ItemTypes = _catalogService.GetItemTypes();
@@ -103,7 +99,6 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
                     ImageBlobStorageService imgBlobService = new ImageBlobStorageService(_config);
                     imgBlobService.DeleteBlobData(model.ImageUrl);
                     model.ImageUrl = imgBlobService.UploadFileToBlobAsync(filename, model.File.OpenReadStream(), model.File.ContentType).Result;
-                    
                 }
 
                 Item data = new Item
@@ -122,7 +117,6 @@ namespace ePizzaHub.WebUI.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-
             }
             ViewBag.Categories = _catalogService.GetCategories();
             ViewBag.ItemTypes = _catalogService.GetItemTypes();

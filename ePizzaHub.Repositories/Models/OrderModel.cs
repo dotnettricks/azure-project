@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.Repositories.Models
 {
@@ -12,6 +9,7 @@ namespace ePizzaHub.Repositories.Models
         {
             Items = new List<ItemModel>();
         }
+
         public string Id { get; set; }
         public string PaymentId { get; set; }
         public int UserId { get; set; }

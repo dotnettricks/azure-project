@@ -1,5 +1,4 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.WebUI.Interfaces;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
@@ -10,6 +9,7 @@ namespace ePizzaHub.WebUI.Helpers
     {
         [RazorInject]
         public IUserAccessor _userAccessor { get; set; }
+
         public User CurrentUser
         {
             get

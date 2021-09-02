@@ -3,12 +3,12 @@ using ePizzaHub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-
 namespace ePizzaHub.WebUI.ViewComponents
 {
     public class PizzaMenuViewComponent : ViewComponent
     {
-        ICatalogService _catalogService;
+        private ICatalogService _catalogService;
+
         public PizzaMenuViewComponent(ICatalogService catalogService)
         {
             _catalogService = catalogService;
@@ -31,5 +31,4 @@ namespace ePizzaHub.WebUI.ViewComponents
             return View("/views/shared/_PizzaMenu.cshtml", itemList);
         }
     }
-    
 }

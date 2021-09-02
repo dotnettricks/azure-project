@@ -63,7 +63,6 @@ a.navbar-brand {
     display: inline-block;
 }
 
-
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
@@ -138,13 +137,13 @@ footer {
         /* Margin bottom by footer height */
         margin-bottom: 250px;
     }
+
     footer {
         position: absolute;
         bottom: 0;
     }
 }
 
-
-    footer a, footer a:visited {
-        color: #a5c7ec;
-    }
+footer a, footer a:visited {
+    color: #a5c7ec;
+}

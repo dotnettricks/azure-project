@@ -1,5 +1,4 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Models;
@@ -14,8 +13,8 @@ namespace ePizzaHub.WebUI.Controllers
 {
     public class AccountController : Controller
     {
-        IAuthenticationService _authService;
-        IQueueService _queueService;
+        private IAuthenticationService _authService;
+        private IQueueService _queueService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(ILogger<AccountController> logger, IAuthenticationService authService, IQueueService queueService)
@@ -83,7 +82,7 @@ namespace ePizzaHub.WebUI.Controllers
                         Email = model.Email
                     };
 
-                    //Adding to queue the user details to send email 
+                    //Adding to queue the user details to send email
                     _queueService.SendMessageAsync(usr, "emailqueue");
                     return RedirectToAction("Login");
                 }

@@ -11,16 +11,19 @@ namespace ePizzaHub.Services.Implementations
     {
         private readonly ICartRepository _cartRepo;
         private readonly IRepository<CartItem> _cartItem;
+
         public CartService(ICartRepository cartRepo, IRepository<CartItem> cartItem)
         {
             _cartRepo = cartRepo;
             _cartItem = cartItem;
         }
+
         public int GetCartCount(Guid cartId)
         {
             var cart = _cartRepo.GetCart(cartId);
             return cart != null ? cart.Items.Count() : 0;
         }
+
         public int DeleteItem(Guid cartId, int ItemId)
         {
             return _cartRepo.DeleteItem(cartId, ItemId);
@@ -94,6 +97,7 @@ namespace ePizzaHub.Services.Implementations
         {
             return _cartRepo.UpdateQuantity(CartId, Id, Quantity);
         }
+
         public int UpdateCart(Guid CartId, int UserId)
         {
             return _cartRepo.UpdateCart(CartId, UserId);

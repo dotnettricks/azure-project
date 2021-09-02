@@ -1,5 +1,3 @@
-using System;
-
 namespace ePizzaHub.WebUI.Models
 {
     public class ErrorViewModel

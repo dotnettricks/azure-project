@@ -15,8 +15,9 @@ namespace ePizzaHub.Services.Implementations
     {
         private readonly IOptions<RazorPayConfig> _razorPayConfig;
         private readonly RazorpayClient _client;
-        IRepository<PaymentDetails> _paymentRepo;
-        ICartRepository _cartRepo;
+        private IRepository<PaymentDetails> _paymentRepo;
+        private ICartRepository _cartRepo;
+
         public PaymentService(IOptions<RazorPayConfig> razorPayConfig, IRepository<PaymentDetails> paymentRepo, ICartRepository cartRepo)
         {
             _razorPayConfig = razorPayConfig;
@@ -54,7 +55,7 @@ namespace ePizzaHub.Services.Implementations
                 try
                 {
                     Payment payment = _client.Payment.Fetch(paymentId);
-                    // This code is for capture the payment 
+                    // This code is for capture the payment
                     Dictionary<string, object> options = new Dictionary<string, object>();
                     options.Add("amount", payment.Attributes["amount"]);
                     options.Add("currency", payment.Attributes["currency"]);
@@ -65,7 +66,6 @@ namespace ePizzaHub.Services.Implementations
                 {
                     return null;
                 }
-
             }
             return null;
         }

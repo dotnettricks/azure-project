@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@ namespace ePizzaHub.WebUI.Extensions
         public static async Task SetRecordAsync<T>(this IDistributedCache cache,
             string recordId,
             T data,
-            TimeSpan? absoluteExpireTime=null,
+            TimeSpan? absoluteExpireTime = null,
             TimeSpan? unusedExpirationTime = null)
         {
             var options = new DistributedCacheEntryOptions();
@@ -25,8 +25,8 @@ namespace ePizzaHub.WebUI.Extensions
         public static async Task<T> GetRecordAsync<T>(this IDistributedCache cache, string recordId)
         {
             var jsonData = await cache.GetStringAsync(recordId);
-            
-            if(jsonData is null)
+
+            if (jsonData is null)
             {
                 return default;
             }

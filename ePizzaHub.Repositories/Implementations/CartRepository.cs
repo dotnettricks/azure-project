@@ -1,5 +1,4 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Repositories.Interfaces;
 using ePizzaHub.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +24,7 @@ namespace ePizzaHub.Repositories.Implementations
 
         public Cart GetCart(Guid CartId)
         {
-            return dbContext.Carts.Include("Items").Where(p => p.Id == CartId && p.IsActive==true).FirstOrDefault();
+            return dbContext.Carts.Include("Items").Where(p => p.Id == CartId && p.IsActive == true).FirstOrDefault();
         }
 
         public CartModel GetCartDetails(Guid CartId)

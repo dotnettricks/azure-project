@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace ePizzaHub.Entities
+﻿namespace ePizzaHub.Entities
 {
     public class Address
     {
         public Address()
         {
-
         }
+
         public Address(string street, string locality, string city, string zipcode)
         {
             Street = street;
@@ -18,6 +13,7 @@ namespace ePizzaHub.Entities
             City = city;
             ZipCode = zipcode;
         }
+
         public int Id { get; set; }
         public string Street { get; set; }
         public string Locality { get; set; }

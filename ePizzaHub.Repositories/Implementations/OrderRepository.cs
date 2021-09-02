@@ -1,13 +1,9 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Repositories.Interfaces;
 using ePizzaHub.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace ePizzaHub.Repositories.Implementations
@@ -21,10 +17,11 @@ namespace ePizzaHub.Repositories.Implementations
                 return _dbContext as AppDbContext;
             }
         }
+
         public OrderRepository(DbContext dbContext) : base(dbContext)
         {
-
         }
+
         public OrderModel GetOrderDetails(string orderId)
         {
             var model = (from order in dbContext.Orders
@@ -58,6 +55,7 @@ namespace ePizzaHub.Repositories.Implementations
                .Include(o => o.OrderItems)
                .Where(x => x.UserId == UserId).ToList();
         }
+
         public PagingListModel<OrderModel> GetOrderList(int page, int pageSize)
         {
             var pagingModel = new PagingListModel<OrderModel>();
@@ -68,7 +66,7 @@ namespace ePizzaHub.Repositories.Implementations
                         {
                             Id = order.Id,
                             UserId = order.UserId,
-                            PaymentId=payment.Id,
+                            PaymentId = payment.Id,
                             CreatedDate = order.CreatedDate,
                             GrandTotal = payment.GrandTotal,
                             Locality = order.Locality

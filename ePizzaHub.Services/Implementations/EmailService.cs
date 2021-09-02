@@ -3,16 +3,16 @@ using System;
 using System.Net;
 using System.Net.Mail;
 
-
 namespace ePizzaHub.Services.Implementations
 {
-    public class EmailService: IEmailService
+    public class EmailService : IEmailService
     {
         private string _mailHost;
         private int _port = 587;
         private string _fromEmail;
         private string _username;
         private string _password;
+
         public EmailService()
         {
             _mailHost = "";
@@ -21,6 +21,7 @@ namespace ePizzaHub.Services.Implementations
             _username = "";
             _password = "";
         }
+
         public bool SendMail(string to, string subject, string body)
         {
             try

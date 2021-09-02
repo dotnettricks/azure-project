@@ -1,5 +1,4 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.WebUI.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +9,7 @@ namespace ePizzaHub.WebUI.Helpers
     {
         private readonly UserManager<User> _userManager;
         private IHttpContextAccessor _httpContextAccessor;
+
         public UserAccessor(UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;

@@ -1,17 +1,16 @@
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Mail;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace ServiceBusEmail
 {
     public static class ServiceBusEmail
     {
         [FunctionName("SendEmailServiceBusTrigger")]
-        public static void Run([ServiceBusTrigger("emailqueue", Connection = "ServiceBusConnection")]string myQueueItem, ILogger log)
+        public static void Run([ServiceBusTrigger("emailqueue", Connection = "ServiceBusConnection")] string myQueueItem, ILogger log)
         {
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
             var deserializedMessage = JsonConvert.DeserializeObject<User>(myQueueItem);
@@ -38,6 +37,7 @@ namespace ServiceBusEmail
             log.LogInformation($"Successfully sent!!");
         }
     }
+
     public class User
     {
         public string UserName;
