@@ -10,8 +10,7 @@ Tasks To DO:
 8. #Task: Create a Service To Manage Images to Azure Storage.
 9. #Task: Create a Azure Redis Cache to Cache Items List.
 10. #Task: Add a Global Search to search Items using Azure Search.
-11. #Task: Implement OAuth Login Using Azure AD.
-12. #Task: Create a CI/CD Pipelines using Azure DevOps for Build and Release.
+11. #Task: Create a CI/CD Pipelines using Azure DevOps for Build and Release.
 
 
 Note: 
