@@ -1,10 +1,15 @@
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,6 +60,26 @@ namespace ePizzaHub.WebUI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureAppConfiguration((config)=>
+                {
+                    var buildConfig = config.Build();
+                    var vaultName = buildConfig["AzureKeyVault:Endpoint"];
+
+                    var clientId = buildConfig["AzureKeyVault:ClientId"];
+                    var clientSecret = buildConfig["AzureKeyVault:ClientSecret"];
+
+                    //var keyVaultClient = new KeyVaultClient(async (authority, resource, scope) =>
+                    //{
+                    //    var credential = new DefaultAzureCredential(false);
+                    //    var token = credential.GetToken(new TokenRequestContext(
+                    //        new[] {"https://vault.azure.net/.default"
+                    //    }));
+                    //    Debug.WriteLine(token.Token);
+                    //    return token.Token;
+                    //});
+                    config.AddAzureKeyVault(vaultName, clientId, clientSecret);
+
                 });
     }
 }
