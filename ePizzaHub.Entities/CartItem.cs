@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.Entities
 {
@@ -12,6 +9,7 @@ namespace ePizzaHub.Entities
         {
             // required by EF
         }
+
         public CartItem(int itemId, int quantity, decimal unitPrice)
         {
             ItemId = itemId;

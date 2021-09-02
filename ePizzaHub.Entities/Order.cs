@@ -1,8 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.Entities
 {
@@ -12,6 +9,7 @@ namespace ePizzaHub.Entities
         {
             OrderItems = new HashSet<OrderItem>();
         }
+
         public string Id { get; set; }
         public int UserId { get; set; }
         public string PaymentId { get; set; }

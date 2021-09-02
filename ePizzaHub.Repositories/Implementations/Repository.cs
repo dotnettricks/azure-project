@@ -1,20 +1,19 @@
 ﻿using ePizzaHub.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ePizzaHub.Repositories.Implementations
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected DbContext _dbContext;
+
         public Repository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public void Add(TEntity entity)
         {
             _dbContext.Set<TEntity>().Add(entity);
@@ -44,7 +43,7 @@ namespace ePizzaHub.Repositories.Implementations
 
         public int SaveChanges()
         {
-           return _dbContext.SaveChanges();
+            return _dbContext.SaveChanges();
         }
 
         public void Update(TEntity entity)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ePizzaHub.Entities
+﻿namespace ePizzaHub.Entities
 {
     public class ItemType
     {

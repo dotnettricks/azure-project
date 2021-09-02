@@ -8,11 +8,13 @@ namespace ePizzaHub.WebUI.Helpers
 {
     public class FileHelper : IFileHelper
     {
-        IWebHostEnvironment _env;
+        private IWebHostEnvironment _env;
+
         public FileHelper(IWebHostEnvironment env)
         {
             _env = env;
         }
+
         private string GenerateFileName(string fileName)
         {
             string[] strName = fileName.Split('.');

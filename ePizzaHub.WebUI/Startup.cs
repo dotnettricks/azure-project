@@ -19,7 +19,7 @@ namespace ePizzaHub.WebUI
             Env = env;
         }
 
-        IWebHostEnvironment Env { get; }
+        private IWebHostEnvironment Env { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,7 +27,7 @@ namespace ePizzaHub.WebUI
         {
             ConfigureRepositories.AddServices(services, Configuration);
             ConfigureDependencies.AddServices(services);
-           
+
             services.AddSession();
             services.AddTransient<IQueueService, QueueService>();
             services.AddTransient<IPaymentQueueService, PaymentQueueService>();
@@ -86,7 +86,7 @@ namespace ePizzaHub.WebUI
                         "public, max-age=" + durationInSeconds;
                 }
             });
-            
+
             app.UseWebMarkupMin();
             app.UseSession();
             app.UseRouting();

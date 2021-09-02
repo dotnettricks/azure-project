@@ -1,15 +1,15 @@
-﻿using ePizzaHub.Services.Interfaces;
+﻿using ePizzaHub.Entities;
+using ePizzaHub.Repositories.Models;
+using ePizzaHub.Services.Interfaces;
 using ePizzaHub.Services.Models;
+using ePizzaHub.WebUI.Helpers;
+using ePizzaHub.WebUI.Interfaces;
+using ePizzaHub.WebUI.Models;
+using ePizzaHub.WebUI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
-using ePizzaHub.Entities;
-using ePizzaHub.WebUI.Helpers;
-using ePizzaHub.Repositories.Models;
-using ePizzaHub.WebUI.Models;
-using ePizzaHub.WebUI.Interfaces;
-using ePizzaHub.WebUI.Services;
 
 namespace ePizzaHub.WebUI.Controllers
 {
@@ -24,6 +24,7 @@ namespace ePizzaHub.WebUI.Controllers
         private readonly IOrderService _orderService;
         private readonly IPaymentQueueService _paymentQueueService;
         public IUserAccessor _userAccessor { get; set; }
+
         public User CurrentUser
         {
             get
@@ -35,7 +36,7 @@ namespace ePizzaHub.WebUI.Controllers
             }
         }
 
-        public PaymentController(IPaymentService paymentService, IOrderService orderService, IOptions<RazorPayConfig> razorPayConfig, IUserAccessor userAccessor,IPaymentQueueService paymentQueueService)
+        public PaymentController(IPaymentService paymentService, IOrderService orderService, IOptions<RazorPayConfig> razorPayConfig, IUserAccessor userAccessor, IPaymentQueueService paymentQueueService)
         {
             _razorPayConfig = razorPayConfig;
             _paymentService = paymentService;
@@ -107,7 +108,6 @@ namespace ePizzaHub.WebUI.Controllers
                             Address address = TempData.Get<Address>("Address");
                             _orderService.PlaceOrder(CurrentUser.Id, orderId, paymentId, cart, address);
 
-                            
                             TempData.Set("PaymentDetails", model);
 
                             //adding to queue to send out an email for payment
@@ -123,7 +123,6 @@ namespace ePizzaHub.WebUI.Controllers
             }
             catch (Exception ex)
             {
-
             }
             ViewBag.Message = "Your payment has been failed. You can contact us at support@dotnettricks.com.";
             return View();

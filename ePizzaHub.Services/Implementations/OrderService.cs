@@ -10,6 +10,7 @@ namespace ePizzaHub.Services.Implementations
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepo;
+
         public OrderService(IOrderRepository orderRepo)
         {
             _orderRepo = orderRepo;
@@ -38,10 +39,12 @@ namespace ePizzaHub.Services.Implementations
         {
             return _orderRepo.GetUserOrders(UserId);
         }
-        public PagingListModel<OrderModel> GetOrderList(int page=1, int pageSize=10)
+
+        public PagingListModel<OrderModel> GetOrderList(int page = 1, int pageSize = 10)
         {
             return _orderRepo.GetOrderList(page, pageSize);
         }
+
         public int PlaceOrder(int userId, string orderId, string paymentId, CartModel cart, Address address)
         {
             Order order = new Order

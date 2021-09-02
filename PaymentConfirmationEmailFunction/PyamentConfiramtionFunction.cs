@@ -1,19 +1,17 @@
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
-using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace PaymentConfirmationEmailFunction
 {
     public static class PyamentConfiramtionFunction
     {
         [FunctionName("PaymentConfirmationFunction")]
-        public static void Run([ServiceBusTrigger("PaymentQueue", Connection = "ServiceBusConnection")]string myQueueItem, ILogger log)
+        public static void Run([ServiceBusTrigger("PaymentQueue", Connection = "ServiceBusConnection")] string myQueueItem, ILogger log)
         {
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
             var deserializedMessage = JsonConvert.DeserializeObject<PaymentDetails>(myQueueItem);
@@ -55,19 +53,19 @@ namespace PaymentConfirmationEmailFunction
 
             MailMessage _mailmsg = new MailMessage();
 
-            //Make TRUE because our body text is html  
+            //Make TRUE because our body text is html
             _mailmsg.IsBodyHtml = true;
 
-            //Set From Email ID  
+            //Set From Email ID
             _mailmsg.From = new MailAddress(email);
 
-            //Set To Email ID  
+            //Set To Email ID
             _mailmsg.To.Add(receipeient.ToString());
 
-            //Set Subject  
+            //Set Subject
             _mailmsg.Subject = "Your Invoice";
 
-            //Set Body Text of Email   
+            //Set Body Text of Email
             _mailmsg.Body = body.ToString();
 
             try

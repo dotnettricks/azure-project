@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ePizzaHub.Entities
+﻿namespace ePizzaHub.Entities
 {
     public class OrderItem
     {
@@ -19,6 +14,7 @@ namespace ePizzaHub.Entities
             Quantity = quantity;
             Total = total;
         }
+
         public int Id { get; set; }
         public int ItemId { get; set; }
         public decimal UnitPrice { get; set; }

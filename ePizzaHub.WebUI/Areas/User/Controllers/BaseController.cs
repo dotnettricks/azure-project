@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace ePizzaHub.WebUI.Areas.User.Controllers
 {
     [Area("User")]
-    [CustomAuthorize(Roles ="User")]
+    [CustomAuthorize(Roles = "User")]
     public class BaseController : Controller
     {
         public IUserAccessor _userAccessor { get; set; }
+
         public Entities.User CurrentUser
         {
             get
@@ -19,6 +20,7 @@ namespace ePizzaHub.WebUI.Areas.User.Controllers
                     return null;
             }
         }
+
         public BaseController(IUserAccessor userAccessor)
         {
             _userAccessor = userAccessor;

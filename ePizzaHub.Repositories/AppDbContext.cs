@@ -1,19 +1,17 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ePizzaHub.Repositories
 {
-    public class AppDbContext: IdentityDbContext<User, Role, int>
+    public class AppDbContext : IdentityDbContext<User, Role, int>
     {
         public AppDbContext()
         {
-
         }
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
-        {
 
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -25,6 +23,7 @@ namespace ePizzaHub.Repositories
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<PaymentDetails> PaymentDetails { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

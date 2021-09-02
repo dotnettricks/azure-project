@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ePizzaHub.Entities
 {
@@ -12,6 +11,7 @@ namespace ePizzaHub.Entities
             CreatedDate = DateTime.Now;
             IsActive = true;
         }
+
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public DateTime CreatedDate { get; set; }

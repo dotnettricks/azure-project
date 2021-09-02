@@ -1,7 +1,6 @@
 ﻿using ePizzaHub.Entities;
 using ePizzaHub.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,15 +12,17 @@ namespace ePizzaHub.Services.Implementations
         protected SignInManager<User> _signManager;
         protected UserManager<User> _userManager;
         protected RoleManager<Role> _roleManager;
+
         public AuthenticationService(SignInManager<User> signManager, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signManager = signManager;
         }
+
         public User AuthenticateUser(string Username, string Password)
         {
-            //lockoutOnFailure default value:5 
+            //lockoutOnFailure default value:5
             var result = _signManager.PasswordSignInAsync(Username, Password, false, lockoutOnFailure: false).Result;
             if (result.Succeeded)
             {
@@ -38,6 +39,7 @@ namespace ePizzaHub.Services.Implementations
         {
             return _userManager.FindByNameAsync(Username).Result;
         }
+
         public bool CreateUser(User user, string Password)
         {
             var result = _userManager.CreateAsync(user, Password).Result;

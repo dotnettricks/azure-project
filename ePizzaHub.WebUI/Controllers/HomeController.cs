@@ -1,6 +1,6 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Services.Interfaces;
+using ePizzaHub.WebUI.Extensions;
 using ePizzaHub.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -9,18 +9,16 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using ePizzaHub.WebUI.Extensions;
 
 namespace ePizzaHub.WebUI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        ICatalogService _catalogService;
-        IMemoryCache _cache;
-        IDistributedCache _distributedCache;
+        private ICatalogService _catalogService;
+        private IMemoryCache _cache;
+        private IDistributedCache _distributedCache;
 
         public HomeController(ILogger<HomeController> logger, ICatalogService catalogService, IMemoryCache cache, IDistributedCache distributedCache)
         {
@@ -45,7 +43,7 @@ namespace ePizzaHub.WebUI.Controllers
             //{
             //    _logger.LogError(ex, "Exception Caught");
             //}
-            
+
             //return View();
         }
 
@@ -65,8 +63,6 @@ namespace ePizzaHub.WebUI.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
-
         private async Task<IEnumerable<Item>> LoadItems()
         {
             IEnumerable<Item> listItems = null;
@@ -74,13 +70,12 @@ namespace ePizzaHub.WebUI.Controllers
 
             listItems = await _distributedCache.GetRecordAsync<IEnumerable<Item>>(recordKey);
 
-            if(listItems is null)
+            if (listItems is null)
             {
                 listItems = _catalogService.GetItems();
-               
+
                 await _distributedCache.SetRecordAsync(recordKey, listItems);
             }
-            
 
             return listItems;
         }

@@ -1,10 +1,8 @@
-﻿
-using ePizzaHub.Entities;
+﻿using ePizzaHub.Entities;
 using ePizzaHub.Repositories.Models;
 using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Text.Json;
@@ -13,8 +11,9 @@ namespace ePizzaHub.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        ICartService _cartService;
-       IUserAccessor _userAccessor;
+        private ICartService _cartService;
+        private IUserAccessor _userAccessor;
+
         public User CurrentUser
         {
             get
@@ -26,7 +25,7 @@ namespace ePizzaHub.WebUI.Controllers
             }
         }
 
-        Guid CartId
+        private Guid CartId
         {
             get
             {
@@ -44,11 +43,13 @@ namespace ePizzaHub.WebUI.Controllers
                 return Id;
             }
         }
+
         public CartController(ICartService cartService, IUserAccessor userAccessor)
         {
             _cartService = cartService;
-           _userAccessor = userAccessor;
+            _userAccessor = userAccessor;
         }
+
         public IActionResult Index()
         {
             CartModel cart = _cartService.GetCartDetails(CartId);
@@ -59,7 +60,6 @@ namespace ePizzaHub.WebUI.Controllers
             }
             return View(cart);
         }
-
 
         [Route("Cart/AddToCart/{ItemId}/{UnitPrice}/{Quantity}")]
         public IActionResult AddToCart(int ItemId, decimal UnitPrice, int Quantity)

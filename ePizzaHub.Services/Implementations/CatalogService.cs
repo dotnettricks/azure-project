@@ -11,6 +11,7 @@ namespace ePizzaHub.Services.Implementations
         private readonly IRepository<Item> _itemRepo;
         private readonly IRepository<Category> _categoryRepo;
         private readonly IRepository<ItemType> _itemTypeRepo;
+
         public CatalogService(IRepository<Item> itemRepo, IRepository<Category> categoryRepo, IRepository<ItemType> itemTypeRepo)
         {
             _itemRepo = itemRepo;

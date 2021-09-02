@@ -2,24 +2,24 @@
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ePizzaHub.WebUI.Services
 {
     public class ImageBlobStorageService
     {
-        string connectionString;
-        string containerName;
-        IConfiguration _config;
+        private string connectionString;
+        private string containerName;
+        private IConfiguration _config;
+
         public ImageBlobStorageService(IConfiguration config)
         {
             _config = config;
             connectionString = _config["Storage:Connection"];
             containerName = _config["Storage:Container"];
         }
+
         private string GenerateFileName(string fileName)
         {
             string[] strName = fileName.Split('.');
