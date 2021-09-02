@@ -15,7 +15,7 @@ namespace ePizzaHub.Services.Configuration
         {
             services.AddDbContext<AppDbContext>((options) =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DbConnection"));
+                options.UseSqlServer(configuration["SqlDbConnection"]);
             });
 
             services.AddIdentity<User, Role>().

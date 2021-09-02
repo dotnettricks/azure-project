@@ -28,7 +28,7 @@ namespace ePizzaHub.WebUI.Extensions
             
             if(jsonData is null)
             {
-                return default(T);
+                return default;
             }
 
             return JsonSerializer.Deserialize<T>(jsonData);
