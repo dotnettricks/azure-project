@@ -2,6 +2,7 @@
 using ePizzaHub.Services.Interfaces;
 using ePizzaHub.WebUI.Helpers;
 using ePizzaHub.WebUI.Interfaces;
+using ePizzaHub.WebUI.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ePizzaHub.WebUI.Configuration
@@ -18,6 +19,7 @@ namespace ePizzaHub.WebUI.Configuration
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IUserAccessor, UserAccessor>();
             services.AddTransient<IFileHelper, FileHelper>();
+            services.AddScoped<IAzureKeyVaultService, AzureKeyVaultService>();
         }
     }
 }
